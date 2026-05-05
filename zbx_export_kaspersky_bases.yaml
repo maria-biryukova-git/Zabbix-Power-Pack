@@ -1,0 +1,27 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 846977d1dfed4968bc5f8bdb363285bc
+      name: 'Templates/Operating systems'
+  templates:
+    - uuid: a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6
+      template: 'Template Kaspersky Security Center Bases'
+      name: 'Template Kaspersky Security Center Bases'
+      description: |
+        Мониторинг актуальности антивирусных баз KSC через PowerShell.
+        Требуется: Zabbix Agent Active, PowerShell 5.1+.
+      groups:
+        - name: 'Templates/Operating systems'
+      items:
+        - uuid: b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6
+          name: 'KSC: Статус антивирусных баз (JSON)'
+          key: 'ksc.bases.discovery'
+          type: ZABBIX_ACTIVE
+          value_type: TEXT
+          delay: '30m'
+          description: 'Возвращает JSON с состоянием баз'
+      trigger_prototypes:
+        - uuid: c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6
+          expression: 'find(/Template KSC Bases/ksc.bases.status,,"like","Critical")=1'
+          name: 'KSC: Базы устарели более 3 дней'
+          priority: HIGH
