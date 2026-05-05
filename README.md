@@ -27,3 +27,13 @@ PowerShell-скрипт + Zabbix Active Agent + Template.
 
 ### 1. Настройка агента
 Добавьте в `zabbix_agent2.conf`:
+
+### 2. Импорт шаблона
+Zabbix → Configuration → Templates → Import → `zbx_export_kaspersky_bases.yaml`
+
+### 3. Привязка к хосту
+Привяжите шаблон к хосту, где установлен KSC.
+
+## Адаптация под вашу среду
+- Проверьте путь к реестру: `regedit` → `HKEY_LOCAL_MACHINE\SOFTWARE\...`
+- При необходимости измените пороговые значения дней в скрипте
